@@ -1,0 +1,66 @@
+  <% if flash[:notice]%>
+  <% end %>
+
+<% if @book.errors.any? %>
+<strong><font size="5"><%= @book.errors.count %>errors prohibited this obj from being saved:</font></strong>
+<% @book.errors.full_messages.each do |message| %>
+ <li><%= message %></li>
+<% end %>
+<% end %>
+</div>
+
+<div class="container px-5 px-sm-0">
+<div class="row">
+<div class="col-md-3">
+      <h2>User info</h2>
+      <%= attachment_image_tag current_user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size: '100x100' %>
+      <table class="table table-hover table-inverse">
+        <tr>
+  	     <th>name</th>
+  	     <th><%= @book.user.name %></th>
+        </tr>
+        <tr>
+  	     <th>introduction</th>
+  	     <th><%= @book.user.introduction %></th>
+        </tr>
+      </table>
+<div>
+  <%= link_to edit_user_path(@book.user.id) do %>
+  <i class="fas fa-user-cog btn btn-outline-secondary btn-block"></i>
+  <% end %>
+</div>
+
+<p></p>
+
+<h2>New book</h2>
+<%= form_with model: Book.new, local:true do |f| %>
+ <div class="form-group">
+  <label for="book_title">Title</label>
+    <input class="form-control book_title" type="text" name="book[title]" id="book_title">
+  </div>
+<div class="form-group">
+  <label for="book_opinion">Opinion</label>
+  　<textarea class="form-control book_body" name="book[body]" id="book_body"></textarea>
+  </div>
+<button class="btn btn-success" type="submit">Create Book</button>
+<% end %>
+</div>
+
+    <div class="col-md-8 offset-md-1">
+  		<h2>Book detail</h2>
+  	<table class="table table-hover table-inverse">
+  		    <td><%= attachment_image_tag @book.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size:'40x40' %></br><%= link_to @book.user.name, user_path(@book.user) %></td>
+  		    <td><%=link_to book_path(@book.id) do %>
+  		    <%= @book.title %>
+  		    <% end %>
+  		    </td>
+  		    <td><%= @book.body %></td>
+  		    <% if @book.user == current_user %>
+  		    <td><%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-success btn-sm" %></td>
+  		    <td><%= link_to "Destroy", book_path(@book), method: :delete, class: "btn btn-danger btn-sm", "data-confirm" => "本当に削除しますか？" %></td>
+  		  </tr>
+  		  <% end %>
+  	 </table>
+    </div>
+  </div>
+</div>
