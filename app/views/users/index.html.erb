@@ -1,53 +1,34 @@
-  <p></p>
+<p></p>
   
-  <div class="alert">
-<% if @user.errors.any? %>
-<strong><font size="5"><%= @user.errors.count %>errors prohibited this obj from being saved:</font></strong>
-<% user.errors.full_messages.each do |message| %>
- <li><%= message %></li>
-<% end %>
-<% end %>
-</div>
+<%= render 'users/error' %>
 
-  <%= render 'books/userinfo' %>
+<%= render 'books/userinfo' %>
 
 <div>
-  <%= link_to edit_user_path(current_user.id) do %>
+ <%= link_to edit_user_path(current_user.id) do %>
   <i class="fas fa-user-cog btn btn-outline-secondary btn-block"></i>
-  <% end %>
+ <% end %>
 </div>
 
 <p></p>
 
-<h2>New book</h2>
-<%= form_with model: Book.new, local:true do |f| %>
-<div class="form-group">
-  <label for="book_title">Title</label>
-    <input class="form-control book_title" type="text" name="book[title]" id="book_title">
-  </div>
-<div class="form-group">
-  <label for="book_opinion">Opinion</label>
-  　<textarea class="form-control book_body" name="book[body]" id="book_body"></textarea>
-  </div>
-<button class="btn btn-success" type="submit">Create Book</button>
-<% end %>
-</div>
+<%= render 'books/newbook' %>
 
 <div class="col-md-8 offset-md-1">
-  <h2>Users</h2>
-   <table class="table table-hover table-inverse">
-  <tr>
+ <h2>Users</h2>
+  <table class="table table-hover table-inverse">
+   <tr>
     <th>image</th>
     <th>name</th>
-    <th
-  </tr>
- <% @users.each do |user| %>
-  <tr>
+    <th></th>
+   </tr>
+  <% @users.each do |user| %>
+   <tr>
     <td><%= attachment_image_tag user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg", size:'40x40' %></td>
     <td><%= user.name %></td>
     <td><%= link_to "Show", user_path(user) %></td>
-  </tr>
- <% end %>
-</table>
-</div>
+   </tr>
+  <% end %>
+  </table>
+ </div>
 </div>

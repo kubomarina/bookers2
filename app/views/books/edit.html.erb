@@ -1,30 +1,24 @@
 <div class="container">
-  <div class="row">
-    <div class="container  col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-    <h2>Editing Book</h2>
-    <div class="alert">
-<% if @book.errors.any? %>
-<font size="5"><%= @book.errors.count %>errors prohibited this obj from being saved:</font>
-<% @book.errors.full_messages.each do |message| %>
-<li><%= message %></li>
-<% end %>
-<% end %>
-</div>
-    <%= form_with model:@book, local:true do |f| %>
+ <div class="row">
+  <div class="container  col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+   <h2>Editing Book</h2>
+
+   <%= render 'books/error' %>
+
+   <%= form_with model:@book, local:true do |f| %>
     <h6>Title</h6>
-    <%= f.text_field :title, class:"w-100" %>
+   <%= f.text_field :title, class:"w-100" %>
     <p></p>
     <h6>Opinion</h6>
-    <%= f.text_area :body, class:"w-100" %>
+   <%= f.text_area :body, class:"w-100" %>
     <p></p>
     <button class="btn btn-success" type="submit">Update Book</button>
-    <% end %>
-    <div>
-      <p></p>
+   <% end %>
+   <div>
+    <p></p>
     <p><%= link_to "Show", book_path(@book.id) %> |<%= link_to "Back", "/books" %></p>
-
+   </div>
   </div>
  </div>
-</div>
 </div>
 

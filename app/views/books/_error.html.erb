@@ -1,0 +1,8 @@
+<div id="error_explanation">
+ <% if @book.errors.any? %>
+  <font size="5"><%= @book.errors.count %>errors prohibited this obj from being saved:</font>
+   <% @book.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+   <% end %>
+  <% end %>
+</div>
